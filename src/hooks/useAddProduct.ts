@@ -1,8 +1,7 @@
 import { toast } from 'react-toastify';
 import { useCartItems } from './useStore';
 import { useDispatch } from './useDispatch';
-import { ICartItem } from 'types';
-import { Actions, IAction } from 'utils/StoreContext';
+import { ICartItem, Actions, IAction } from 'types';
 
 export const useAddToCart = () => {
   const dispatch = useDispatch();

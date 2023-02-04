@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Layout, CheckoutWizard, CheckoutForm } from 'components';
 
 const Shipping = () => {

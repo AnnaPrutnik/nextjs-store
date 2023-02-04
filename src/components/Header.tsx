@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useCartItems, useShippingAddress } from 'hooks';
+import { useCartItems } from 'hooks';
 import Link from 'next/link';
 import { calcTotalItemInCart } from 'helpers';
 import { useSession } from 'next-auth/react';
@@ -7,11 +7,9 @@ import { UserMenu } from 'components';
 
 export const Header = () => {
   const cart = useCartItems();
-  const shipping = useShippingAddress();
   const { data: session, status } = useSession();
   const [cartItemsCount, setCartItemsCount] = useState(0);
 
-  console.log('shipping', shipping);
   useEffect(() => {
     const total = calcTotalItemInCart(cart);
     setCartItemsCount(total);

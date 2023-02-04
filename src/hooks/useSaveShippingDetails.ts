@@ -1,6 +1,5 @@
 import { useDispatch } from './useDispatch';
-import { Actions, IAction } from 'utils/StoreContext';
-import { IShippingDetails } from 'types/IStore';
+import { IShippingDetails, Actions, IAction } from 'types';
 
 export const useSaveShippingDetails = () => {
   const dispatch = useDispatch();

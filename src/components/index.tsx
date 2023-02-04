@@ -14,3 +14,4 @@ export * from './UserMenuItem';
 export * from './CheckoutWizard';
 export * from './CheckoutForm';
 export * from './Auth';
+export * from './PaymentForm';

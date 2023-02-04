@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { signIn } from 'next-auth/react';
-import { getError } from 'utils/error';
+import { getError } from 'helpers/error';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-toastify';
 

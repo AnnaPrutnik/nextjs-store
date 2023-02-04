@@ -1,16 +1,16 @@
 import { useDispatch } from './useDispatch';
 import { Actions, IAction } from 'types';
 
-export const useDeleteProduct = () => {
+export const useSavePayment = () => {
   const dispatch = useDispatch();
 
-  const onDeleteProductFromCart = (slug: string) => {
+  const onSavePayment = (payment: string) => {
     const action: IAction = {
-      type: Actions.CART_DELETE_ITEM,
-      payload: slug,
+      type: Actions.SAVE_PAYMENT_METHOD,
+      payload: payment,
     };
     dispatch(action);
   };
 
-  return onDeleteProductFromCart;
+  return onSavePayment;
 };

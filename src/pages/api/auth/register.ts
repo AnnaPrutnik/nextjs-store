@@ -1,7 +1,7 @@
 import db from 'utils/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { UserModel } from 'models/User';
-import { getError } from 'utils/error';
+import { getError } from 'helpers/error';
 
 export default async function handler(
   req: NextApiRequest,

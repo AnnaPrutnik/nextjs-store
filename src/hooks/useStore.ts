@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { Store } from 'utils/StoreContext';
+import { Store } from 'store/StoreContext';
 
 export const useStore = () => {
   const { state } = useContext(Store);
@@ -15,12 +15,15 @@ export const useStore = () => {
 
 export const useCartItems = () => {
   const state = useStore();
-
   return state.cart.cartItems;
 };
 
 export const useShippingAddress = () => {
   const state = useStore();
-
   return state.cart.shipping;
+};
+
+export const usePaymentMethod = () => {
+  const state = useStore();
+  return state.cart.payment;
 };

@@ -1,5 +1,5 @@
 import { useDispatch } from './useDispatch';
-import { Actions, IAction } from 'utils/StoreContext';
+import { Actions, IAction } from 'types';
 
 export const useDeleteCart = () => {
   const dispatch = useDispatch();
