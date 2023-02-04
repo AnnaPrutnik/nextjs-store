@@ -1,13 +1,16 @@
 import React from 'react';
 
-import { Layout } from 'components';
+import { Layout, CheckoutWizard, CheckoutForm } from 'components';
 
 const Shipping = () => {
   return (
     <Layout title="Shipping">
-      <div>Shipping</div>
+      <CheckoutWizard activeStep={1} />
+      <CheckoutForm />
     </Layout>
   );
 };
+
+Shipping.auth = true;
 
 export default Shipping;

@@ -1,31 +1,43 @@
 import React from 'react';
 import Link from 'next/link';
-import { signIn } from 'next-auth/react';
-import { getError } from 'utils/error';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { getError } from 'utils/error';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 interface IFormInput {
+  username: string;
   email: string;
   password: string;
 }
 
-export const LoginForm = () => {
+export const RegisterForm = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormInput>();
 
-  const onSubmit: SubmitHandler<IFormInput> = async ({ email, password }) => {
+  const onSubmit: SubmitHandler<IFormInput> = async ({
+    username,
+    email,
+    password,
+  }) => {
+    const body = { username, email, password };
     try {
-      const result = await signIn('credentials', {
-        redirect: false,
-        email,
-        password,
+      const result = await fetch('api/auth/register', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
-      if (result?.error) {
-        toast.error(result.error);
+      console.log(result);
+      if (result.ok) {
+        router.push('/login');
+      } else {
+        toast.error(result.statusText);
       }
     } catch (error) {
       toast.error(getError(error));
@@ -38,6 +50,25 @@ export const LoginForm = () => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <h1 className="text-lg"></h1>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="username">Name</label>
+        <input
+          type="text"
+          id="username"
+          className="w-full"
+          autoFocus
+          {...register('username', {
+            required: 'Please, enter your username',
+            minLength: {
+              value: 4,
+              message: 'Name should be more than 3 chars',
+            },
+          })}
+        />
+        {errors.username && (
+          <div className="text-red-500">{errors.username.message}</div>
+        )}
+      </div>
       <div className="flex flex-col gap-2">
         <label htmlFor="email">Email</label>
         <input
@@ -79,13 +110,13 @@ export const LoginForm = () => {
       </div>
       <div>
         <button className="primary-button" type="submit">
-          Login
+          Register
         </button>
       </div>
       <div>
-        Don&apos;t have an account? &nbsp;
+        If you have an account, then &nbsp;
         <span className="text-blue-600">
-          <Link href="register">Register</Link>
+          <Link href="login">Login</Link>
         </span>
       </div>
     </form>

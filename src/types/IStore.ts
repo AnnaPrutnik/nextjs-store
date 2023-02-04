@@ -4,6 +4,17 @@ export interface ICartItem {
   price: number;
 }
 
+export interface IShippingDetails {
+  fullName: string;
+  address: string;
+  city: string;
+  postalCode: string;
+  country: string;
+}
+
 export interface IStore {
-  cart: ICartItem[];
+  cart: {
+    cartItems: ICartItem[];
+    shipping: IShippingDetails;
+  };
 }

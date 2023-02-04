@@ -1,11 +1,10 @@
 import React from 'react';
-
 import { Layout, EmptyCart, CartTable, Checkout } from 'components';
-import { useCart } from 'hooks';
+import { useCartItems } from 'hooks';
 import dynamic from 'next/dynamic';
 
 const CartScreen = () => {
-  const cart = useCart();
+  const cart = useCartItems();
 
   return (
     <Layout title="Shopping Cart">

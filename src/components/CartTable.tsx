@@ -1,9 +1,9 @@
 import React from 'react';
 import { CartItem } from 'components';
-import { useCart } from 'hooks';
+import { useCartItems } from 'hooks';
 
 export const CartTable = () => {
-  const cart = useCart();
+  const cart = useCartItems();
 
   return (
     <table className="min-w-full">

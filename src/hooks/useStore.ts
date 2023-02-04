@@ -13,8 +13,14 @@ export const useStore = () => {
   return state;
 };
 
-export const useCart = () => {
+export const useCartItems = () => {
   const state = useStore();
 
-  return state.cart;
+  return state.cart.cartItems;
+};
+
+export const useShippingAddress = () => {
+  const state = useStore();
+
+  return state.cart.shipping;
 };

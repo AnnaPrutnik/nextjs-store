@@ -1,12 +1,12 @@
 import { toast } from 'react-toastify';
-import { useCart } from './useStore';
+import { useCartItems } from './useStore';
 import { useDispatch } from './useDispatch';
 import { ICartItem } from 'types';
 import { Actions, IAction } from 'utils/StoreContext';
 
 export const useAddToCart = () => {
   const dispatch = useDispatch();
-  const cart = useCart();
+  const cart = useCartItems();
 
   const onAddProductToCart = (
     slug: string,
