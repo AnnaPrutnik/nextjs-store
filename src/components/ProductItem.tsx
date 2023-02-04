@@ -12,7 +12,7 @@ export const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
   const addToCart = useAddToCart();
 
   const onClickAddToCart = () => {
-    addToCart(product.slug, product.countInStock, product.price);
+    addToCart(product);
   };
 
   return (

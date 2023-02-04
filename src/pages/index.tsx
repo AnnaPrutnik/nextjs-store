@@ -1,8 +1,11 @@
+import React from 'react';
 import { Layout, ProductItem } from 'components';
 import { IProduct } from 'types';
-import products from 'utils/products.json';
+import { InferGetServerSidePropsType } from 'next';
 
-export default function Home() {
+const Home: React.FC<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> = ({ products }) => {
   return (
     <Layout title="Home Page">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4">
@@ -12,5 +15,17 @@ export default function Home() {
       </div>
     </Layout>
   );
+};
+
+export async function getServerSideProps() {
+  const products: IProduct[] = await fetch('http://localhost:3000/api/products')
+    .then((res) => res.json())
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => console.log(err));
+
+  return { props: { products } };
 }
 
+export default Home;

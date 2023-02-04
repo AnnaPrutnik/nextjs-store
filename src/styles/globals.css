@@ -14,6 +14,13 @@ body {
   box-sizing: border-box;
 }
 
+input {
+  padding: 0;
+  margin: 0;
+  border: none;
+  outline: none;
+}
+
 .card {
   @apply mb-5 flex flex-col h-full rounded-lg border border-gray-200 shadow-md hover:shadow-lg;
 }
@@ -30,7 +37,7 @@ body {
 }
 
 .quantity-button {
-  @apply border-l  bg-amber-300 px-2 py-1 font-bold hover:bg-amber-400 active:bg-amber-500 disabled:bg-gray-400;
+  @apply border-l bg-amber-300 px-2 py-1 font-bold hover:bg-amber-400 active:bg-amber-500 disabled:bg-gray-400;
 }
 
 input,

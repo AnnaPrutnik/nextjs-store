@@ -1,8 +1,10 @@
 import React from 'react';
 export interface ICartItem {
-  product: string;
-  quantity: number;
+  slug: string;
+  name: string;
   price: number;
+  image: string;
+  quantity: number;
 }
 
 export interface IShippingDetails {

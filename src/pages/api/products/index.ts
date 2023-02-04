@@ -1,9 +1,6 @@
 import db from 'utils/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ProductModel } from 'models/Product';
-import { UserModel } from 'models/User';
-import { products } from 'utils/products.js';
-import users from 'utils/users';
 
 export default async function handler(
   req: NextApiRequest,
@@ -11,12 +8,9 @@ export default async function handler(
 ) {
   try {
     await db.connect();
-    await UserModel.deleteMany();
-    await UserModel.insertMany(users);
-    await ProductModel.deleteMany();
-    await ProductModel.insertMany(products);
+    const products = await ProductModel.find().lean();
     await db.disconnect();
-    res.send({ message: 'seeded successfully' });
+    res.status(200).json({ status: 'success', code: 200, data: products });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });

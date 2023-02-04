@@ -1,15 +1,22 @@
 import React from 'react';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { Layout } from 'components';
 import { ProductDetails } from 'components';
-import { useRouter } from 'next/router';
-import products from 'utils/products.json';
+import { IProduct } from 'types';
 
-const ProductScreen = () => {
-  const { query } = useRouter();
-  const slug = query.slug;
+export const getServerSideProps: GetServerSideProps<{
+  product: IProduct;
+}> = async (context) => {
+  const slug = context.params?.slug;
+  const product = await fetch(`http://localhost:3000/api/products/${slug}`)
+    .then((res) => res.json())
+    .then((res) => res.data);
+  return { props: { product } };
+};
 
-  const product = products.find((item) => item.slug === slug);
-
+const ProductScreen: React.FC<
+  InferGetServerSidePropsType<typeof getServerSideProps>
+> = ({ product }) => {
   if (!product) {
     return <Layout title="no found">Product not found</Layout>;
   }

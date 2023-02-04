@@ -1,42 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAddToCart } from 'hooks';
-import { ICartItem } from 'types';
-import { toast } from 'react-toastify';
+import { ICartItem, IProduct } from 'types';
 
 interface QuantityChangerProps {
   cartItem: ICartItem;
-  inStock: number;
 }
 
 export const QuantityChanger: React.FC<QuantityChangerProps> = ({
   cartItem,
-  inStock,
 }) => {
   const [value, setValue] = useState(cartItem.quantity);
-  const { price, product, quantity } = cartItem;
-  const addProduct = useAddToCart();
+  const [product, setProduct] = useState<IProduct | null>(null);
+  const { slug, quantity } = cartItem;
+  const addToCart = useAddToCart();
 
-  const onIncrementQuantity = () => {
-    addProduct(product, inStock, price, quantity + 1);
-    setValue((prev) => prev + 1);
+  useEffect(() => {
+    getProduct();
+  }, [cartItem]);
+
+  const getProduct = async () => {
+    const product: IProduct = await fetch(
+      `http://localhost:3000/api/products/${slug}`
+    )
+      .then((res) => res.json())
+      .then((res) => res.data);
+    if (!product) {
+      return;
+    }
+    setProduct(product);
   };
 
-  const onDecrementQuantity = () => {
-    addProduct(product, inStock, price, quantity - 1);
-    setValue((prev) => prev - 1);
+  const onIncrementQuantity = async () => {
+    if (product) {
+      addToCart(product, quantity + 1);
+      setValue((prev) => prev + 1);
+    }
+  };
+
+  const onDecrementQuantity = async () => {
+    if (product) {
+      addToCart(product, quantity - 1);
+      setValue((prev) => prev - 1);
+    }
   };
 
   const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number((e.target as HTMLInputElement).value);
-    if (value < 1 || value > inStock) {
-      return toast.error('Sorry! The quantity of product is not available!');
+    if (product) {
+      addToCart(product, value);
     }
-    addProduct(product, inStock, price, value);
     setValue(value);
   };
 
   return (
-    <div className="inline-flex text-lg gap-2 border items-center ">
+    <div className="inline-flex text-lg border items-center ">
       <button
         onClick={onDecrementQuantity}
         className="quantity-button"
@@ -45,14 +62,14 @@ export const QuantityChanger: React.FC<QuantityChangerProps> = ({
         -
       </button>
       <input
-        className="w-7 text-center"
+        className="w-10 text-center p-0"
         value={value}
         onChange={onChangeInput}
       />
       <button
         onClick={onIncrementQuantity}
         className="quantity-button"
-        disabled={quantity === inStock}
+        disabled={quantity === product?.countInStock}
       >
         +
       </button>

@@ -14,7 +14,7 @@ export const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   const addToCart = useAddToCart();
 
   const onClickAddToCart = () => {
-    addToCart(product.slug, product.countInStock, product.price);
+    addToCart(product);
     router.push('/cart');
   };
 

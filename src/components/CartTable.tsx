@@ -5,6 +5,8 @@ import { useCartItems } from 'hooks';
 export const CartTable = () => {
   const cart = useCartItems();
 
+  console.log(cart);
+
   return (
     <table className="min-w-full">
       <thead className="border-b">
@@ -18,7 +20,7 @@ export const CartTable = () => {
       </thead>
       <tbody>
         {cart.map((item) => (
-          <CartItem cartItem={item} key={item.product} />
+          <CartItem cartItem={item} key={item.slug} />
         ))}
       </tbody>
     </table>

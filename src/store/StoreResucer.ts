@@ -6,12 +6,12 @@ export function reducer(state: IStore, action: IAction): IStore {
     case Actions.CART_ADD_ITEM: {
       const newItem = action.payload;
       const existItem = state.cart.cartItems.find(
-        (item) => item.product === newItem.product
+        (item) => item.slug === newItem.slug
       );
       let cartItems: ICartItem[];
       if (existItem) {
         cartItems = state.cart.cartItems.map((item) =>
-          item.product === newItem.product
+          item.slug === newItem.slug
             ? { ...item, quantity: newItem.quantity }
             : item
         );
@@ -26,7 +26,7 @@ export function reducer(state: IStore, action: IAction): IStore {
     case Actions.CART_DELETE_ITEM: {
       const slug = action.payload;
       const cartItems = state.cart.cartItems.filter(
-        (item) => item.product !== slug
+        (item) => item.slug !== slug
       );
       const newCart = { ...state.cart, cartItems };
       Cookies.set('cart', JSON.stringify(newCart));
@@ -40,6 +40,7 @@ export function reducer(state: IStore, action: IAction): IStore {
         cart: {
           cartItems: [] as ICartItem[],
           shipping: {} as IShippingDetails,
+          payment: '',
         },
       };
     }
