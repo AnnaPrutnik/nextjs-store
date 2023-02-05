@@ -1,4 +1,3 @@
-
 import { NextApiRequest, NextApiResponse } from 'next';
 import { UserModel } from 'models/User';
 import { getError } from 'helpers/error';
@@ -8,11 +7,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-
     const { username, email, password } = req.body;
     const existUser = await UserModel.findOne({ email });
     if (existUser) {
-
       return res
         .status(409)
         .json({ status: 'error', code: 409, message: 'Email in Use' });
@@ -20,8 +17,15 @@ export default async function handler(
     const newUser = new UserModel({ username, email, password });
     const user = await newUser.save();
 
-
-    res.status(201).json({ status: 'success', code: 201, data: user });
+    res.status(201).json({
+      status: 'success',
+      code: 201,
+      data: {
+        email: user.email,
+        isAdmin: user.isAdmin,
+        username: user.username,
+      },
+    });
   } catch (error) {
     const err = getError(error);
     res

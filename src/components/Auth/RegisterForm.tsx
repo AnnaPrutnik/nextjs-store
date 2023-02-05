@@ -30,9 +30,8 @@ export const RegisterForm = () => {
     const body = { username, email, password };
     try {
       const { data: result } = await axios.post('api/auth/register', body);
-      console.log(result);
-      if (result.ok) {
-        router.push('/login');
+      if (result.code === 201) {
+        router.push('/');
       } else {
         toast.error(result.statusText);
       }

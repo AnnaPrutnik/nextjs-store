@@ -4,6 +4,7 @@ import { signIn } from 'next-auth/react';
 import { getError } from 'helpers/error';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 interface IFormInput {
   email: string;
@@ -11,6 +12,8 @@ interface IFormInput {
 }
 
 export const LoginForm = () => {
+  const router = useRouter();
+  const { redirect } = router.query;
   const {
     register,
     handleSubmit,
@@ -26,6 +29,9 @@ export const LoginForm = () => {
       });
       if (result?.error) {
         toast.error(result.error);
+      }
+      if (result?.ok && (typeof redirect === 'string' || !redirect)) {
+        router.push(redirect ? redirect : '/');
       }
     } catch (error) {
       toast.error(getError(error));
@@ -85,7 +91,7 @@ export const LoginForm = () => {
       <div>
         Don&apos;t have an account? &nbsp;
         <span className="text-blue-600">
-          <Link href="/register=">Register</Link>
+          <Link href="/register">Register</Link>
         </span>
       </div>
     </form>
