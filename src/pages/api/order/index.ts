@@ -1,4 +1,3 @@
-import db from 'utils/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from 'pages/api/auth/[...nextauth]';
@@ -21,11 +20,8 @@ export default async function handler(
           });
         }
         const { user } = session;
-        await db.connect();
-        console.log(req.body);
         const newOrder = new OrderModel({ ...req.body, user_id: user.id });
         const order = await newOrder.save();
-        await db.disconnect();
         return res
           .status(200)
           .json({ status: 'success', code: 201, data: order });

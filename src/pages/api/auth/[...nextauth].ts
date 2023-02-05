@@ -1,7 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import { UserModel } from 'models';
-import db from 'utils/db';
+
 import bcrypt from 'bcryptjs';
 import { IUser } from 'types/IUser';
 
@@ -34,14 +34,12 @@ export const authOptions: NextAuthOptions = {
         email: { label: 'Email', type: 'email' },
         password: { label: 'Password', type: 'password' },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const { email, password } = credentials as {
           email: string;
           password: string;
         };
-        await db.connect();
         const user = await UserModel.findOne({ email });
-        await db.disconnect();
         if (user && bcrypt.compareSync(password, user.password)) {
           return user;
         }

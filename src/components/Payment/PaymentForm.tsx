@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { paymentWay } from 'constants/paymentWay';
+import { paymentWay } from 'variables';
 import { useRouter } from 'next/router';
 import { useSavePayment, usePaymentMethod, useShippingAddress } from 'hooks';
 
@@ -21,10 +21,12 @@ export const PaymentForm = () => {
     } else {
       savePayment(selectedPaymentMethod);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     savePayment(selectedPaymentMethod);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedPaymentMethod]);
 
   const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {

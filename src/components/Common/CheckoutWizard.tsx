@@ -1,5 +1,5 @@
 import React from 'react';
-import { checkoutSteps } from 'constants/checkoutSteps';
+import { checkoutSteps } from 'variables';
 
 interface CheckoutWizardProps {
   activeStep?: 1 | 2 | 3;

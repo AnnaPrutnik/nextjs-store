@@ -1,5 +1,6 @@
 import { useDispatch } from './useDispatch';
-import { Actions, IAction } from 'types';
+import { IAction } from 'types';
+import { Actions } from 'variables';
 
 export const useDeleteCart = () => {
   const dispatch = useDispatch();

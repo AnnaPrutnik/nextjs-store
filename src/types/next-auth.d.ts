@@ -1,5 +1,3 @@
-import NextAuth, { DefaultSession } from 'next-auth';
-import { JWT, DefaultJWT } from 'next-auth/jwt';
 import { IUser } from './IUser';
 
 interface AuthUser {

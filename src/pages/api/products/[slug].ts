@@ -1,4 +1,3 @@
-import db from 'utils/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ProductModel } from 'models/Product';
 
@@ -9,9 +8,8 @@ export default async function handler(
   const slug = req.query.slug;
 
   try {
-    await db.connect();
     const product = await ProductModel.findOne({ slug }).lean();
-    await db.disconnect();
+
     res.status(200).json({ status: 'success', code: 200, data: product });
   } catch (error) {
     console.error(error);

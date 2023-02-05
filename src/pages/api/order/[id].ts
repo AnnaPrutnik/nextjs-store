@@ -1,9 +1,7 @@
-import db from 'utils/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { OrderModel } from 'models/Order';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from 'pages/api/auth/[...nextauth]';
-import { IOrder } from 'types';
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,9 +17,7 @@ export default async function handler(
         message: 'SignIn required',
       });
     }
-    await db.connect();
     const order = await OrderModel.findById(id).lean();
-    await db.disconnect();
     res.status(200).json({ status: 'success', code: 200, data: order });
   } catch (error) {
     console.error(error);

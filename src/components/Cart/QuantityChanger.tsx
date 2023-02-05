@@ -17,6 +17,7 @@ export const QuantityChanger: React.FC<QuantityChangerProps> = ({
 
   useEffect(() => {
     getProduct();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartItem]);
 
   const getProduct = async () => {

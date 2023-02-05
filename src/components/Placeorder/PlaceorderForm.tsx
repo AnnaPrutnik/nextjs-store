@@ -36,6 +36,7 @@ export const PlaceorderForm = () => {
     if (!payment) {
       router.push('/payment');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onClickPlaceOrder = async () => {

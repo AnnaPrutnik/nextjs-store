@@ -1,5 +1,6 @@
-import { Actions, IStore, IAction, ICartItem } from 'types';
+import { IStore, IAction, ICartItem } from 'types';
 import Cookies from 'js-cookie';
+import { Actions } from 'variables';
 
 export function reducer(state: IStore, action: IAction): IStore {
   switch (action.type) {

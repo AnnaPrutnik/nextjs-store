@@ -1,4 +1,3 @@
-import db from 'utils/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ProductModel } from 'models/Product';
 import { UserModel } from 'models/User';
@@ -10,12 +9,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    await db.connect();
     await UserModel.deleteMany();
     await UserModel.insertMany(users);
     await ProductModel.deleteMany();
     await ProductModel.insertMany(products);
-    await db.disconnect();
+
     res.send({ message: 'seeded successfully' });
   } catch (error) {
     console.error(error);

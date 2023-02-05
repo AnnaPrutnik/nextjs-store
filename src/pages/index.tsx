@@ -3,6 +3,7 @@ import { Layout, ProductItem } from 'components';
 import { IProduct } from 'types';
 import { InferGetServerSidePropsType } from 'next';
 import axios from 'utils/axios';
+import dbConnect from 'utils/db';
 
 const Home: React.FC<
   InferGetServerSidePropsType<typeof getServerSideProps>
@@ -19,6 +20,8 @@ const Home: React.FC<
 };
 
 export async function getServerSideProps() {
+  console.log('index server side props');
+  await dbConnect();
   const {
     data: { data: products },
   } = await axios<{ data: IProduct[] }>('api/products');

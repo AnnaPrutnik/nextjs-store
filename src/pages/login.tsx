@@ -9,7 +9,7 @@ const LoginScreen = () => {
   const { redirect } = router.query;
 
   useEffect(() => {
-    if (session?.user) {
+    if (session?.user && typeof redirect === 'string') {
       const url = redirect || '/';
       router.push(url);
     }

@@ -24,6 +24,7 @@ const OrderScreen = () => {
       getOrder();
       setLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order, id]);
 
   const getOrder = async () => {

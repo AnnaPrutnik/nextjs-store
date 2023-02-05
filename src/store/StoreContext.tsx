@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react';
 import Cookies from 'js-cookie';
 import { IStore, ICartItem, IShippingDetails, IContextValue } from 'types';
-import { reducer } from './StoreResucer';
+import { reducer } from './StoreReducer';
 
 const cookieValue = Cookies.get('cart');
 
