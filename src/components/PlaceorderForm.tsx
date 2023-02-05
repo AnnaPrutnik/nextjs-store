@@ -40,7 +40,7 @@ export const PlaceorderForm = () => {
   const onClickPlaceOrder = async () => {
     try {
       setLoading(true);
-      const order = await fetch('http://localhost:3000/api/orders', {
+      const order = await fetch('http://localhost:3000/api/order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

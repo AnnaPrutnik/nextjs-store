@@ -26,30 +26,28 @@ const OrderSchema: Schema = new Schema(
         },
       },
     ],
-    shipping: [
-      {
-        fullName: {
-          type: String,
-          required: true,
-        },
-        address: {
-          type: String,
-          required: true,
-        },
-        city: {
-          type: String,
-          required: true,
-        },
-        postalCode: {
-          type: String,
-          required: true,
-        },
-        country: {
-          type: String,
-          required: true,
-        },
+    shipping: {
+      fullName: {
+        type: String,
+        required: true,
       },
-    ],
+      address: {
+        type: String,
+        required: true,
+      },
+      city: {
+        type: String,
+        required: true,
+      },
+      postalCode: {
+        type: String,
+        required: true,
+      },
+      country: {
+        type: String,
+        required: true,
+      },
+    },
     payment: {
       type: String,
       required: true,

@@ -1,4 +1,4 @@
-import { Actions, IStore, IAction, ICartItem, IShippingDetails } from 'types';
+import { Actions, IStore, IAction, ICartItem } from 'types';
 import Cookies from 'js-cookie';
 
 export function reducer(state: IStore, action: IAction): IStore {

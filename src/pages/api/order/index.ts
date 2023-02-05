@@ -13,7 +13,6 @@ export default async function handler(
     case 'POST': {
       try {
         const session = await getServerSession(req, res, authOptions);
-        console.log('session', session);
         if (!session) {
           return res.status(401).json({
             code: 401,
@@ -23,6 +22,7 @@ export default async function handler(
         }
         const { user } = session;
         await db.connect();
+        console.log(req.body);
         const newOrder = new OrderModel({ ...req.body, user_id: user.id });
         const order = await newOrder.save();
         await db.disconnect();
@@ -33,6 +33,10 @@ export default async function handler(
         console.error(error);
         return res.status(500).json({ message: 'Internal server error' });
       }
+    }
+
+    case 'GET': {
+      return res.send('GET REQUEST');
     }
 
     default:

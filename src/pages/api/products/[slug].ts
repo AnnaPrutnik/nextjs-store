@@ -7,7 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const slug = req.query.slug;
-  console.log('slug in api', slug);
+
   try {
     await db.connect();
     const product = await ProductModel.findOne({ slug }).lean();
