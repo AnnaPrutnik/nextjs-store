@@ -15,3 +15,4 @@ export * from './CheckoutWizard';
 export * from './CheckoutForm';
 export * from './Auth';
 export * from './PaymentForm';
+export * from './PlaceorderForm';

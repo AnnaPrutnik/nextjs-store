@@ -34,14 +34,11 @@ export function reducer(state: IStore, action: IAction): IStore {
     }
 
     case Actions.CART_DELETE: {
-      Cookies.remove('cart');
+      const newCart = { ...state.cart, cartItems: [] as ICartItem[] };
+      Cookies.set('cart', JSON.stringify(newCart));
       return {
         ...state,
-        cart: {
-          cartItems: [] as ICartItem[],
-          shipping: {} as IShippingDetails,
-          payment: '',
-        },
+        cart: newCart,
       };
     }
 

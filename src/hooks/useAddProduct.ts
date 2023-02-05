@@ -30,7 +30,6 @@ export const useAddToCart = () => {
       quantity: currentQuantity,
     };
 
-    console.log('newCartItem', newCartItem);
     const action: IAction = {
       type: Actions.CART_ADD_ITEM,
       payload: newCartItem,

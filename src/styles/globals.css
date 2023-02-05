@@ -26,7 +26,7 @@ input {
 }
 
 .checkout {
-  @apply mb-5  rounded-lg border border-gray-200 shadow-md hover:shadow-lg;
+  @apply mb-5 rounded-lg border border-gray-200 shadow-md hover:shadow-lg;
 }
 .action {
   @apply mb-5 block rounded-lg border border-gray-200 shadow-md;

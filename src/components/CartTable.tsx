@@ -5,8 +5,6 @@ import { useCartItems } from 'hooks';
 export const CartTable = () => {
   const cart = useCartItems();
 
-  console.log(cart);
-
   return (
     <table className="min-w-full">
       <thead className="border-b">
