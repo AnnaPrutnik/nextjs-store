@@ -1,7 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { signIn } from 'next-auth/react';
 
 interface AuthProps {
   children: React.ReactNode;

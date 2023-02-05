@@ -4,6 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { getError } from 'helpers/error';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import axios from 'utils/axios';
 
 interface IFormInput {
   username: string;
@@ -26,13 +27,7 @@ export const RegisterForm = () => {
   }) => {
     const body = { username, email, password };
     try {
-      const result = await fetch('api/auth/register', {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const { data: result } = await axios.post('api/auth/register', body);
       console.log(result);
       if (result.ok) {
         router.push('/login');

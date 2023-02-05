@@ -10,6 +10,7 @@ import {
 import { CartTable } from 'components';
 import { getError, roundPrice, calcTotalCartPrice } from 'helpers';
 import { toast } from 'react-toastify';
+import axios from 'utils/axios';
 
 export const PlaceorderForm = () => {
   const [loading, setLoading] = useState(false);
@@ -40,23 +41,19 @@ export const PlaceorderForm = () => {
   const onClickPlaceOrder = async () => {
     try {
       setLoading(true);
-      const order = await fetch('http://localhost:3000/api/order', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          orderItems: cartItems,
-          shipping,
-          payment,
-          itemsPrice,
-          shippingPrice,
-          taxPrice,
-          totalPrice,
-        }),
-      })
-        .then((res) => res.json())
-        .then((res) => res.data);
+      const {
+        data: { data: order },
+      } = await axios.post('api/order', {
+        orderItems: cartItems,
+        shipping,
+        payment,
+        itemsPrice,
+        shippingPrice,
+        taxPrice,
+        totalPrice,
+      });
+      console.log(order);
+
       clearCart();
       router.push(`/order/${order._id}`);
     } catch (error) {

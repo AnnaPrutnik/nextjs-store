@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAddToCart } from 'hooks';
 import { ICartItem, IProduct } from 'types';
+import axios from 'utils/axios';
 
 interface QuantityChangerProps {
   cartItem: ICartItem;
@@ -19,15 +20,14 @@ export const QuantityChanger: React.FC<QuantityChangerProps> = ({
   }, [cartItem]);
 
   const getProduct = async () => {
-    const product: IProduct = await fetch(
-      `http://localhost:3000/api/products/${slug}`
-    )
-      .then((res) => res.json())
-      .then((res) => res.data);
+    const {
+      data: { data: product },
+    } = await axios(`api/products/${slug}`);
+
     if (!product) {
       return;
     }
-    setProduct(product);
+    setProduct(product as IProduct);
   };
 
   const onIncrementQuantity = async () => {

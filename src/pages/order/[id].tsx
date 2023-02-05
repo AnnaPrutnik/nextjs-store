@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { Layout } from 'components';
 import { IOrder } from 'types';
 import { getError } from 'helpers';
+import axios from 'utils/axios';
 
 const OrderScreen = () => {
   const [order, setOrder] = useState<IOrder | null>(null);
@@ -28,9 +29,10 @@ const OrderScreen = () => {
   const getOrder = async () => {
     try {
       setLoading(true);
-      const order = await fetch(`http://localhost:3000/api/order/${id}`)
-        .then((res) => res.json())
-        .then((res) => res.data);
+      const {
+        data: { data: order },
+      } = await axios(`api/order/${id}`);
+
       if (!order) {
         setError('No order');
       }
