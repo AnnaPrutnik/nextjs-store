@@ -8,20 +8,18 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    console.log('we are into register handler');
     await db.connect();
-    console.log('db connected');
     const { username, email, password } = req.body;
     const existUser = await UserModel.findOne({ email });
-    console.log('existUser', existUser);
     if (existUser) {
+      await db.disconnect();
       return res
         .status(409)
         .json({ status: 'error', code: 409, message: 'Email in Use' });
     }
     const newUser = new UserModel({ username, email, password });
     const user = await newUser.save();
-    console.log('user', user);
+
     await db.disconnect();
     res.status(201).json({ status: 'success', code: 201, data: user });
   } catch (error) {

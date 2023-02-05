@@ -10,6 +10,7 @@ interface IFormInput {
   username: string;
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
 export const RegisterForm = () => {
@@ -17,6 +18,7 @@ export const RegisterForm = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm<IFormInput>();
 
@@ -99,9 +101,31 @@ export const RegisterForm = () => {
             },
           })}
         />
-        {errors.password && (
-          <div className="text-red-500">{errors.password.message}</div>
+      </div>
+      <div className="flex flex-col gap-2">
+        <label htmlFor="confirmPassword" className="mb-1">
+          Confirm Password
+        </label>
+        <input
+          type="password"
+          id="confirmPassword"
+          className="w-full"
+          {...register('confirmPassword', {
+            required: 'Please, enter confirm password',
+            minLength: {
+              value: 6,
+              message: 'Password should be more than 5 chars',
+            },
+            validate: (value) => value === getValues('password'),
+          })}
+        />
+        {errors.confirmPassword && (
+          <div className="text-red-500">{errors.confirmPassword.message}</div>
         )}
+        {errors.confirmPassword &&
+          errors.confirmPassword.type === 'validate' && (
+            <div className="text-red-500">Password do not match</div>
+          )}
       </div>
       <div>
         <button className="primary-button" type="submit">

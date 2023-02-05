@@ -85,7 +85,7 @@ export const LoginForm = () => {
       <div>
         Don&apos;t have an account? &nbsp;
         <span className="text-blue-600">
-          <Link href="register">Register</Link>
+          <Link href="/register=">Register</Link>
         </span>
       </div>
     </form>
