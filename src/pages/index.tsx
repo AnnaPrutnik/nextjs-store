@@ -24,7 +24,7 @@ export async function getServerSideProps() {
   await dbConnect();
   const {
     data: { data: products },
-  } = await axios<{ data: IProduct[] }>('api/products');
+  } = await axios<{ data: IProduct[] }>('/api/products');
 
   return { props: { products } };
 }

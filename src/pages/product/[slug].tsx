@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps<{
   const slug = context.params?.slug;
   const {
     data: { data: product },
-  } = await axios<{ data: IProduct }>(`api/products/${slug}`);
+  } = await axios<{ data: IProduct }>(`/api/products/${slug}`);
   return { props: { product } };
 };
 

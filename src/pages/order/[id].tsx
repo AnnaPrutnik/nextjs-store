@@ -32,7 +32,7 @@ const OrderScreen = () => {
       setLoading(true);
       const {
         data: { data: order },
-      } = await axios(`api/order/${id}`);
+      } = await axios(`/api/order/${id}`);
 
       if (!order) {
         setError('No order');
